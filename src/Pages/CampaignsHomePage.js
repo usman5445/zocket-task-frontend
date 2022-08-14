@@ -15,7 +15,7 @@ export default function CampaignsHomePage() {
           </span>
         </div>
         <button
-          onClick={() => navigate("new")}
+          onClick={() => navigate("new/1")}
           className="flex items-center justify-center space-x-2 bg-blue-500 rounded-lg  h-fit px-5 py-3   text-white hover:shadow-lg"
         >
           <img src={AddIcon} alt="" /> <span>Create new campaign</span>

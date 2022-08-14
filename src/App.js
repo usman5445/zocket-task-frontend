@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <div className="App bg-[#F6F9FF] relative font-Eudoxus-regular flex  h-screen w-screen">
         <Sidebar />
-        <div className="relative w-full">
+        <div className="relative w-full  h-screen">
           <Navbar />
 
           <Routes>

@@ -4,10 +4,10 @@ import CampaignsHomePage from "./CampaignsHomePage";
 import { CampaignsNewPage } from "./CampaignsNewPage";
 function CampaignsPage() {
   return (
-    <div className="m-8">
+    <div className="m-8 h-5/6 relative">
       <Routes>
         <Route index path="" element={<CampaignsHomePage />} />
-        <Route path="new" element={<CampaignsNewPage />} />
+        <Route path="new/*" element={<CampaignsNewPage />} />
       </Routes>
     </div>
   );

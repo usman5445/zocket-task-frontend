@@ -7,6 +7,9 @@ import CheckedIcon from "../Icons/Vector (1).svg";
 export default function Stepper({ steps }) {
   function stepsChanger() {
     let elements = document.querySelectorAll("#bg");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].classList.add("bg-gray-300");
+    }
     for (let i = 0; i < steps * 2; i++) {
       elements[i - 1]?.classList.replace("bg-gray-300", "bg-orange-400");
     }
@@ -28,7 +31,7 @@ export default function Stepper({ steps }) {
           <p className="c-stepper_dic">What you want to do</p>
           <div
             id="bg"
-            className="h-2 top-1/3 w-full  bg-gray-300 absolute -right-2/4 -z-10"
+            className="h-1 top-1/3 w-full  bg-gray-300 absolute -right-2/4 -z-10"
           ></div>
         </li>
         <li className="c-stepper_item relative">
@@ -41,7 +44,7 @@ export default function Stepper({ steps }) {
           <p className="c-stepper_dic">Choose product</p>
           <div
             id="bg"
-            className="h-2 top-1/3 w-full  bg-gray-300 absolute -right-2/4 -z-10"
+            className="h-1 top-1/3 w-full  bg-gray-300 absolute -right-2/4 -z-10"
           ></div>
         </li>
         <li className="c-stepper_item relative">
@@ -54,7 +57,7 @@ export default function Stepper({ steps }) {
           <p className="c-stepper_dic">Campaign settings</p>
           <div
             id="bg"
-            className="h-2 top-1/3 w-full  bg-gray-300 absolute -right-2/4 -z-10"
+            className="h-1 top-1/3 w-full  bg-gray-300 absolute -right-2/4 -z-10"
           ></div>
         </li>
         <li className="c-stepper_item">
