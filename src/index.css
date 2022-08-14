@@ -6,3 +6,14 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.c-stepper {
+  --size: 3rem;
+  --spacing: 0.5rem;
+  @apply flex flex-wrap;
+}
+
+.c-stepper_item {
+  z-index: 3;
+  @apply flex flex-1 flex-col items-center;
+}

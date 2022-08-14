@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import Sidebar from "./Components/Sidebar";
@@ -15,8 +15,8 @@ function App() {
           <Navbar />
 
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/campaigns" element={<CampaignsPage />} />
+            <Route index path="/" element={<HomePage />} />
+            <Route path="/campaigns/*" element={<CampaignsPage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/customers" element={<CustomersPage />} />
           </Routes>
