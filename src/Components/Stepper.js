@@ -8,6 +8,7 @@ export default function Stepper({ steps }) {
   function stepsChanger() {
     let elements = document.querySelectorAll("#bg");
     for (let i = 0; i < elements.length; i++) {
+      elements[i].classList.remove("bg-orange-400");
       elements[i].classList.add("bg-gray-300");
     }
     for (let i = 0; i < steps * 2; i++) {
@@ -19,7 +20,7 @@ export default function Stepper({ steps }) {
     stepsChanger();
   }, [steps]);
   return (
-    <div className="my-8">
+    <div className="mt-8">
       <ol className="c-stepper  ">
         <li className="c-stepper_item relative">
           <img

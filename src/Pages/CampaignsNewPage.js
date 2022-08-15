@@ -7,9 +7,13 @@ import CampaignsNewS3Page from "./CampaignsNewS3Page";
 import CampaignsNewS4Page from "./CampaignsNewS4Page";
 export const CampaignsNewPage = () => {
   const [steps, setSteps] = useState(1);
+  const location = useLocation();
+  useEffect(() => {
+    setSteps(+location.pathname.slice(-1));
+  }, [location]);
 
   return (
-    <div className="h-[70%] relative">
+    <div className="h-[75%] relative">
       <div className="flex justify-between items-center">
         <div className="items-start flex flex-col">
           <h2 className="text-3xl font-bold">Your Ad Campaign</h2>

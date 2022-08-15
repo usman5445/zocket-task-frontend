@@ -6,7 +6,7 @@ function CampaignsNewS3Page({ setSteps }) {
   const navigate = useNavigate();
   const [selectedBtn, setSelectedBtn] = useState();
   const [selectedLoc, setSelectedLoc] = useState();
-  console.log(selectedBtn);
+
   return (
     <div className="bg-white text-start p-4 border h-full rounded-lg flex flex-col relative">
       <div>
