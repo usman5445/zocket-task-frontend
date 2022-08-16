@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CampaignProductOption from "../Components/CampaignProductOption";
-
-function CampaignsNewS2Page({ setSteps }) {
+import { getAllProducts } from "../Utils/api";
+function CampaignsNewS2Page({ setSteps, setData, data }) {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(products[0]?._id);
+  useEffect(() => {
+    getAllProducts()
+      .then((products) => setProducts(products.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="bg-white text-start p-4 border rounded-lg flex flex-col relative">
       <div>
@@ -12,69 +18,16 @@ function CampaignsNewS2Page({ setSteps }) {
       </div>
       <hr className="my-4" />
       <div className="grid grid-cols-3  gap-3">
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 1}
-          onClick={() => setSelectedOption(1)}
-          title="Bluberry cake with raw toppings"
-          rate={2290}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 2}
-          onClick={() => setSelectedOption(2)}
-          title="Chocolate truffle cake"
-          rate={2190}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 3}
-          onClick={() => setSelectedOption(3)}
-          title="Browine cake with fluffy cream"
-          rate={1122}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 4}
-          onClick={() => setSelectedOption(4)}
-          title="Ferro rocher cake"
-          rate={1234}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 5}
-          onClick={() => setSelectedOption(5)}
-          title="Custurd mixed with fruit cake"
-          rate={2456}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 6}
-          onClick={() => setSelectedOption(6)}
-          title="Best raw topping choco cake"
-          rate={2345}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 7}
-          onClick={() => setSelectedOption(7)}
-          title="Green cup cakes"
-          rate={1234}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 8}
-          onClick={() => setSelectedOption(8)}
-          title="Blueberry topping cakes"
-          rate={2456}
-        />
-        <CampaignProductOption
-          img={"#"}
-          isActive={selectedOption == 9}
-          onClick={() => setSelectedOption(9)}
-          title="Blueberry topping cakes"
-          rate={2345}
-        />
+        {products.map((product) => (
+          <CampaignProductOption
+            img={product?.imgUrl}
+            isActive={selectedProduct == product._id}
+            onClick={() => setSelectedProduct(product._id)}
+            title={product?.name}
+            rate={product?.price}
+            key={product?._id}
+          />
+        ))}
       </div>
       <div className="self-end">
         <button
@@ -88,6 +41,7 @@ function CampaignsNewS2Page({ setSteps }) {
         </button>
         <button
           onClick={() => {
+            setData({ ...data, productId: selectedProduct });
             navigate("/campaigns/new/3");
             setSteps(3);
           }}

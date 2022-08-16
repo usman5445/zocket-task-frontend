@@ -7,6 +7,7 @@ import CampaignsNewS3Page from "./CampaignsNewS3Page";
 import CampaignsNewS4Page from "./CampaignsNewS4Page";
 export const CampaignsNewPage = () => {
   const [steps, setSteps] = useState(1);
+  const [data, setData] = useState({});
   const location = useLocation();
   useEffect(() => {
     setSteps(+location.pathname.slice(-1));
@@ -27,11 +28,44 @@ export const CampaignsNewPage = () => {
         <Route
           index
           path="1"
-          element={<CampaignsNewS1Page setSteps={setSteps} />}
+          element={
+            <CampaignsNewS1Page
+              setSteps={setSteps}
+              setData={setData}
+              data={data}
+            />
+          }
         />
-        <Route path="2" element={<CampaignsNewS2Page setSteps={setSteps} />} />
-        <Route path="3" element={<CampaignsNewS3Page setSteps={setSteps} />} />
-        <Route path="4" element={<CampaignsNewS4Page setSteps={setSteps} />} />
+        <Route
+          path="2"
+          element={
+            <CampaignsNewS2Page
+              setSteps={setSteps}
+              setData={setData}
+              data={data}
+            />
+          }
+        />
+        <Route
+          path="3"
+          element={
+            <CampaignsNewS3Page
+              setSteps={setSteps}
+              setData={setData}
+              data={data}
+            />
+          }
+        />
+        <Route
+          path="4"
+          element={
+            <CampaignsNewS4Page
+              setSteps={setSteps}
+              setData={setData}
+              data={data}
+            />
+          }
+        />
       </Routes>
     </div>
   );

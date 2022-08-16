@@ -19,85 +19,97 @@ import ActiveUserIcon from "../Icons/Frame.svg";
 import UserIcon from "../Icons/Frame-5.svg";
 import CampaignOption from "../Components/CampaignOption";
 import { useNavigate } from "react-router-dom";
-function CampaignsNewS1Page({ setSteps }) {
+function CampaignsNewS1Page({ setSteps, setData, data }) {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(0);
+  const platformArr = [
+    "Google",
+    "Facebook",
+    "Facebook",
+    "Facebook",
+    "Youtube",
+    "Instagram",
+    "Google",
+    "Youtube",
+    "Google",
+  ];
+
   return (
     <div className="bg-white text-start p-4 border rounded-lg flex flex-col relative">
       <div>
         <span className="font-bold">What you want to do?</span>
       </div>
       <hr className="my-4" />
-      <div className="grid grid-cols-3 grid-rows-3 gap-3">
+      <div className="grid grid-cols-3 grid-rows-3 gap-3 ">
         <CampaignOption
           icon={CallIcon}
           activeIcon={ActiveCallIcon}
-          isActive={selectedOption == 1}
-          onClick={() => setSelectedOption(1)}
+          isActive={selectedOption == 0}
+          onClick={() => setSelectedOption(0)}
           title="Get Leads as calls"
           dis="Reach broad audience and get leads through calls"
         />
         <CampaignOption
           icon={MsgIcon}
           activeIcon={ActiveMsgIcon}
-          isActive={selectedOption == 2}
-          onClick={() => setSelectedOption(2)}
+          isActive={selectedOption == 1}
+          onClick={() => setSelectedOption(1)}
           title="Get Leads as Facebook messages"
           dis="Get more FB messages from Leads"
         />
         <CampaignOption
           icon={UserIcon}
           activeIcon={ActiveUserIcon}
-          isActive={selectedOption == 3}
-          onClick={() => setSelectedOption(3)}
+          isActive={selectedOption == 2}
+          onClick={() => setSelectedOption(2)}
           title="Increase page followers"
           dis="Encourage customers to follow your page"
         />
         <CampaignOption
           icon={PepleIcon}
           activeIcon={ActivePepleIcon}
-          isActive={selectedOption == 4}
-          onClick={() => setSelectedOption(4)}
+          isActive={selectedOption == 3}
+          onClick={() => setSelectedOption(3)}
           title="Get Customer Leads"
           dis="Encourage customers to take action"
         />
         <CampaignOption
           icon={EyeIcon}
           activeIcon={ActiveEyeIcon}
-          isActive={selectedOption == 5}
-          onClick={() => setSelectedOption(5)}
+          isActive={selectedOption == 4}
+          onClick={() => setSelectedOption(4)}
           title="Get more youtube views"
           dis="Increase organic views by obtaining user attention "
         />
         <CampaignOption
           icon={ArrowIcon}
           activeIcon={ActiveArrowIcon}
-          isActive={selectedOption == 6}
-          onClick={() => setSelectedOption(6)}
+          isActive={selectedOption == 5}
+          onClick={() => setSelectedOption(5)}
           title="Get more website traffic"
           dis="Get the right people to visit your website"
         />
         <CampaignOption
           icon={ShopIcon}
           activeIcon={ActiveShopIcon}
-          isActive={selectedOption == 7}
-          onClick={() => setSelectedOption(7)}
+          isActive={selectedOption == 6}
+          onClick={() => setSelectedOption(6)}
           title="Increase Live store traffic"
           dis="Drive visits to local stores, restaurants & Dealerships"
         />
         <CampaignOption
           icon={DownIcon}
           activeIcon={ActiveDownIcon}
-          isActive={selectedOption == 8}
-          onClick={() => setSelectedOption(8)}
+          isActive={selectedOption == 7}
+          onClick={() => setSelectedOption(7)}
           title="Increase your App installs"
           dis="Get more installs, interactions for your app"
         />
         <CampaignOption
           icon={PadIcon}
           activeIcon={ActivePadIcon}
-          isActive={selectedOption == 9}
-          onClick={() => setSelectedOption(9)}
+          isActive={selectedOption == 8}
+          onClick={() => setSelectedOption(8)}
           title="Increase the catalogue sales"
           dis="Drive the sales of your catalogue and get more leads"
         />
@@ -114,6 +126,7 @@ function CampaignsNewS1Page({ setSteps }) {
         </button>
         <button
           onClick={() => {
+            setData({ ...data, platform: platformArr[selectedOption] });
             navigate("/campaigns/new/2");
             setSteps(2);
           }}

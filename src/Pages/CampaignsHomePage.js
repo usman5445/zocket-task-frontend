@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Components/Loader";
 import TableRow from "../Components/TableRow";
 import AddIcon from "../Icons/add-circle.svg";
 import SearchIcon from "../Icons/search-normal.svg";
+import { getAllCampaigns } from "../Utils/api";
 export default function CampaignsHomePage() {
   const navigate = useNavigate();
-  return (
-    <div>
+  const [campaigns, setCampaigns] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleFilter(e) {
+    if (e.target.value === "All Platform") {
+      getAllCampaigns()
+        .then((resp) => setCampaigns(resp.data))
+        .catch((err) => console.log(err));
+      return;
+    }
+    getAllCampaigns()
+      .then((resp) =>
+        setCampaigns(
+          resp.data.filter((item) => item.platform === e.target.value)
+        )
+      )
+      .catch((err) => console.log(err));
+  }
+  useEffect(() => {
+    getAllCampaigns()
+      .then((campaigns) => setCampaigns(campaigns.data))
+      .catch((error) => console.log(error));
+  }, [isLoading]);
+  return isLoading ? (
+    <Loader isLoading={isLoading} />
+  ) : (
+    <div className=" h-full relative">
       <div className="flex justify-between items-center">
         <div className="items-start flex flex-col">
           <h2 className="text-3xl font-bold">Your Campaigns</h2>
@@ -21,7 +48,7 @@ export default function CampaignsHomePage() {
           <img src={AddIcon} alt="" /> <span>Create new campaign</span>
         </button>
       </div>
-      <div className="w-full h-fit p-6 bg-white my-4 rounded-lg border">
+      <div className="w-full  overflow-y-scroll h-[92%]  p-6 bg-white my-4 rounded-lg border">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 border p-2 rounded-lg">
             <img src={SearchIcon} alt="" />
@@ -39,8 +66,14 @@ export default function CampaignsHomePage() {
               className="p-2 rounded-lg border bg-white"
               name="platform"
               id="platform"
+              defaultValue={"All Platform"}
+              onChange={(e) => handleFilter(e)}
             >
               <option value="All Platform">All Platform</option>
+              <option value="Google">Google</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Youtube">Youtube</option>
             </select>
             <label className="text-gray-400" htmlFor="status">
               Status:
@@ -61,7 +94,7 @@ export default function CampaignsHomePage() {
             </select>
           </div>
         </div>
-        <table className="w-full  my-4 table-auto">
+        <table className="w-full my-4 table-auto">
           <thead className="  text-gray-400    ">
             <tr className="bg-gray-100 ">
               <th className="rounded-l-lg py-3 font-normal">
@@ -78,11 +111,16 @@ export default function CampaignsHomePage() {
               <th className="rounded-r-lg py-3 font-normal">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <TableRow trId={1} />
-            <TableRow trId={2} />
-            <TableRow trId={3} />
-            <TableRow trId={4} />
+          <tbody className=" ">
+            {campaigns.map((campaign) => {
+              return (
+                <TableRow
+                  trId={campaign._id}
+                  data={campaign}
+                  setIsLoading={setIsLoading}
+                />
+              );
+            })}
           </tbody>
         </table>
       </div>
